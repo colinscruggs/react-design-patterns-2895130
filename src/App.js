@@ -1,7 +1,5 @@
-import { NumberedList } from "./NumberedList";
-import { LargePersonListItem } from "./people/LargePersonListItem";
-import { SmallPersonListItem } from "./people/SmallPersonListItem";
-import { LargeProductListItem } from "./products/LargeProductListItem";
+import { useState } from "react";
+import  Modal  from "./Modal";
 import { SmallProductListItem } from "./products/SmallProductListItem";
 import { RegularList } from "./RegularList";
 
@@ -40,25 +38,19 @@ const products = [{
 }];
 
 function App() {
+    const [showModal, setShowModal] = useState(false);
+
 	return (
 		<>
-		<RegularList
-			items={people}
-			resourceName="person"
-			itemComponent={SmallPersonListItem} />
-		<NumberedList
-			items={people}
-			resourceName="person"
-			itemComponent={LargePersonListItem} />
-		<RegularList
-			items={products}
-			resourceName="product"
-			itemComponent={SmallProductListItem} />
-		<NumberedList
-			items={products}
-			resourceName="product"
-			itemComponent={LargeProductListItem} />
-		</>
+        <button onClick={() => setShowModal(true)}>Show</button>
+        <Modal show={showModal} setShow={setShowModal}>
+            <RegularList
+                items={products}
+                resourceName="product"
+                itemComponent={SmallProductListItem} 
+            />
+        </Modal>
+        </>
 	);
 }
 
